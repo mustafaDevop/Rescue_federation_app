@@ -21,7 +21,6 @@ export const useAuth = () => {
       setUserTypeSaved("");
       setReturnUser(false);
     } catch (err) {
-      console.log("Error clearing auth:", err);
     }
   };
 

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "RescueApp",
-    "slug": "RescueApp",
+    "slug": "rescueapp",
     "version": "1.0.0",
     "scheme": "your-app-scheme",
     "orientation": "portrait",
@@ -34,6 +34,13 @@
       "expo-font",
       "expo-secure-store",
       "expo-web-browser"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "790dde2f-706a-4a60-80bd-02a6b8d4a269"
+      }
+    },
+    "owner": "rescueapp"
   }
 }

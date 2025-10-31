@@ -1,7 +1,6 @@
 export const baseURL = {
-    API: "http://192.168.108.193:7227",
+    API:"https://rescue-federation-apii.vercel.app",
   
-    Socket: "ws://192.168.108.193:7227",
   };
   
   export const authHeaders = (token: string) => ({

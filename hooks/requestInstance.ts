@@ -103,11 +103,6 @@ const normalizeAxiosError = (error: any): ApiError => {
   const { status, data } = response;
   const serverMessage = extractServerMessage(data);
 
-  //  Special handling for store not found - don't treat as error
-  if (status === 404 && serverMessage?.includes("No store found")) {
-    return new ApiError(serverMessage || "Store not found", 404, status, data);
-  }
-
   switch (status) {
     case 400:
     case 422:
@@ -118,12 +113,12 @@ const normalizeAxiosError = (error: any): ApiError => {
         data
       );
     case 404:
-    //   return new ApiError(
-    //     serverMessage || "Resource not found.",
-    //     404,
-    //     status,
-    //     data
-    //   );
+      return new ApiError(
+        serverMessage || "Resource not found.",
+        404,
+        status,
+        data
+      );
     case 500:
       return new ApiError(
         serverMessage || "Server error. Please try again.",
@@ -187,7 +182,6 @@ export const registerAdmin = async (data: any) => {
 };
 
 export const loginCustomer = async (data: any) => {
-  console.log(' Making customer login request...');
 
   const res = await API.post("/v1.0/auth/login/customer", {
     ...data,
@@ -220,7 +214,6 @@ export const createRequest = async (data: {
 // Get all requests for logged-in user
 export const getUserRequests = async () => {
   const res = await API.get("/v1.0/request");
-  console.log(res)
   return res.data.data.requests;
 };
 
@@ -234,7 +227,6 @@ export const getFilteredRequests = async (filters: {
   sortOrder?: string;
 }) => {
   const res = await API.get("/v1.0/request/filter", { params: filters });
-  console.log(res)
 
   return res.data;
 };
@@ -242,6 +234,5 @@ export const getFilteredRequests = async (filters: {
 // Update request status
 export const updateRequestStatus = async (requestId: string, status: string) => {
   const res = await API.patch(`/v1.0/request/${requestId}/status`, { status });
-  console.log(res)
   return res.data;
 };
